@@ -4,17 +4,24 @@
       v-for="(category, index) in categories"
       :key="index"
       :style="{ animationDelay: `${1000 + 200 * index}ms` }"
-    />
+    >
+      <GalleryPreviewCard :items="category.items" :title="category.name" />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
-// import { Gallery } from "../models/Gallery";
+import { GalleryCategory } from "@/models/GalleryCategory";
+import { Component, Prop, Vue } from "vue-property-decorator";
+import GalleryPreviewCard from "./GalleryPreviewCard.vue";
 
-@Component
+@Component({
+  components: {
+    GalleryPreviewCard
+  }
+})
 export default class CategoriesSection extends Vue {
-  categories = Array.from(new Array(3));
+  @Prop() categories!: GalleryCategory[];
 }
 </script>
 
@@ -26,13 +33,13 @@ export default class CategoriesSection extends Vue {
 }
 
 .categoriesSectionContainer > div {
-  width: 20%;
+  width: 16%;
   height: 400px;
-  min-width: 377px;
-  margin: 12px;
-  background-color: gray;
+  min-width: 320.78px;
+  margin: 16px;
   animation-name: fadeIn;
   animation-duration: 800ms;
   animation-fill-mode: both;
+  box-sizing: border-box;
 }
 </style>

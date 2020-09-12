@@ -5,7 +5,7 @@
       <SubText text="history of the Philippines as captured in photographs" />
     </div>
     <div class="categoriesSection">
-      <CategoriesSection />
+      <CategoriesSection :categories="categories" />
     </div>
   </div>
 </template>
@@ -18,6 +18,7 @@ import CategoriesSection from "./components/CategoriesSection.vue";
 import { GalleryItem } from "./models/GalleryItem";
 import { Gallery } from "./models/Gallery";
 import { Component, Vue } from "vue-property-decorator";
+import { GalleryCategory } from "./models/GalleryCategory";
 
 @Component({
   components: {
@@ -28,6 +29,7 @@ import { Component, Vue } from "vue-property-decorator";
 })
 export default class App extends Vue {
   gallery: Gallery | null = null;
+  categories: GalleryCategory[] = [];
 
   mounted() {
     fetch(
@@ -39,6 +41,7 @@ export default class App extends Vue {
         const categoryNames = Object.keys(transformedData);
 
         categoryNames.forEach((categoryName: string) => {
+          transformedData[categoryName].name = categoryName;
           transformedData[categoryName].items = transformedData[
             categoryName
           ].items.map((galleryItem: GalleryItem) => {
@@ -47,6 +50,10 @@ export default class App extends Vue {
               url: `${categoryName}/${galleryItem.url}`
             };
           });
+        });
+
+        categoryNames.forEach((categoryName: string) => {
+          this.categories.push(transformedData[categoryName]);
         });
       });
   }
@@ -64,7 +71,7 @@ export default class App extends Vue {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #000;
   margin-top: 60px;
 }
 
