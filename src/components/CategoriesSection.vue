@@ -1,12 +1,14 @@
 <template>
   <div class="categoriesSectionContainer">
-    <div
+    <router-link
+      class="galleryCategoryCard"
+      :to="`gallery/${category.name}`"
       v-for="(category, index) in categories"
       :key="index"
-      :style="{ animationDelay: `${1000 + 200 * index}ms` }"
+      :style="{ animationDelay: `${500 + 200 * index}ms` }"
     >
       <GalleryPreviewCard :items="category.items" :title="category.name" />
-    </div>
+    </router-link>
   </div>
 </template>
 
@@ -32,7 +34,7 @@ export default class CategoriesSection extends Vue {
   flex-wrap: wrap;
 }
 
-.categoriesSectionContainer > div {
+.categoriesSectionContainer > .galleryCategoryCard {
   width: 16%;
   height: 400px;
   min-width: 320.78px;

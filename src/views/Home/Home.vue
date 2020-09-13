@@ -54,6 +54,11 @@ export default class App extends Vue {
 
         categoryNames.forEach((categoryName: string) => {
           this.categories.push(transformedData[categoryName]);
+          localStorage.setItem(
+            `gallery-${categoryName}`,
+            // save to local storage
+            JSON.stringify(transformedData[categoryName])
+          );
         });
       });
   }

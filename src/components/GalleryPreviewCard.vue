@@ -28,7 +28,6 @@ export default class GalleryPreviewCard extends Vue {
   previewIndex = 0;
 
   mounted() {
-    console.log(this.items);
     setInterval(() => {
       this.previewIndex =
         this.previewIndex === this.items.length - 1 ? 0 : this.previewIndex + 1;
@@ -37,7 +36,7 @@ export default class GalleryPreviewCard extends Vue {
 }
 </script>
 
-<style scoped>
+<style>
 .pan-enter {
   background-position-x: right;
 }
@@ -69,6 +68,7 @@ export default class GalleryPreviewCard extends Vue {
   cursor: pointer;
   box-sizing: border-box;
   transition: 400ms;
+  color: #000;
 }
 
 .galleryPreviewCardContainer:hover {
@@ -89,5 +89,7 @@ export default class GalleryPreviewCard extends Vue {
 .cardTitle {
   margin-top: 8px;
   display: inline-block;
+  width: 100%;
+  text-align: center;
 }
 </style>
