@@ -1,7 +1,11 @@
 <template>
   <div class="galleryPageContainer">
     <div class="galleryPageContent">
-      <div class="categoryQuote">
+      <h1 class="galleryTitle ">
+        {{ makeTitleCase(category.name) }}
+      </h1>
+      <hr />
+      <div class="categoryQuote animate__animated animate__fadeIn">
         <span class="quoteText">{{ category.quote.text }}</span>
         <span class="quoteCreditText">{{ category.quote.credit }}</span>
       </div>
@@ -11,7 +15,10 @@
           :key="index"
           class="galleryItemInner"
         >
-          <div class="galleryItemInner2">
+          <div
+            class="galleryItemInner2 animate__animated animate__fadeIn"
+            :style="{ animationDelay: `${500 + 200 * index}ms` }"
+          >
             <GalleryItemCard :galleryItem="item" />
           </div>
         </div>
@@ -24,6 +31,7 @@
 import { GalleryCategory } from "@/models/GalleryCategory";
 import { Component, Vue } from "vue-property-decorator";
 import GalleryItemCard from "./components/GalleryItemCard.vue";
+import { makeTitleCase } from "../../utils/stringUtils";
 
 @Component({
   components: {
@@ -34,6 +42,7 @@ export default class GalleryPage extends Vue {
   baseUrl: string = process.env.VUE_APP_RESOURCE_BASE_URL;
   category: GalleryCategory | null = null;
 
+  makeTitleCase = makeTitleCase;
   created() {
     const categoryModel = localStorage.getItem(
       `gallery-${this.$route.params.categoryName}`
@@ -76,12 +85,14 @@ export default class GalleryPage extends Vue {
   display: flex;
   flex: 1 0 0;
   width: 100%;
+  flex-wrap: wrap;
 }
 .galleryItemContainer > * {
-  margin: 8px;
+  padding: 8px;
 }
 .galleryItemInner {
-  width: 33%;
+  width: 33.33%;
+  box-sizing: border-box;
 }
 .galleryItemInner2 {
   display: block;
@@ -99,14 +110,23 @@ export default class GalleryPage extends Vue {
   justify-content: center;
   max-width: 960px;
 }
-@media screen and (max-width: 960px) {
+
+.galleryTitle {
+  font-weight: bold;
+  font-size: 24px;
+}
+@media screen and (max-width: 980px) {
   .galleryItemContainer > * {
-    margin: 2px;
+    padding: 2px;
+  }
+
+  .galleryTitle {
+    margin-left: 16px;
   }
 }
 @media screen and (max-width: 600px) {
   .galleryItemContainer > * {
-    margin: 2px;
+    padding: 1px;
   }
 }
 </style>
