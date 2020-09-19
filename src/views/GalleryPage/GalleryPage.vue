@@ -1,15 +1,16 @@
 <template>
   <div class="galleryPageContainer">
     <div class="galleryPageContent">
-      <div class="galleryTitleContainer">
-        <h1 class="galleryTitle ">
-          {{ makeTitleCase(category.name) }}
-        </h1>
-        <hr />
-      </div>
-      <div class="categoryQuote">
-        <span class="quoteText">{{ category.quote.text }}</span>
-        <span class="quoteCreditText">{{ category.quote.credit }}</span>
+      <div>
+        <div class="galleryTitleContainer">
+          <h1 class="galleryTitle ">
+            {{ makeTitleCase(category.name) }}
+          </h1>
+        </div>
+        <div class="categoryQuote">
+          <span class="quoteText">{{ category.quote.text }}</span>
+          <span class="quoteCreditText">{{ category.quote.credit }}</span>
+        </div>
       </div>
       <div class="galleryItemContainer">
         <div
@@ -19,37 +20,61 @@
         >
           <div
             class="galleryItemInner2 animate__animated animate__fadeIn"
-            :style="{ animationDelay: `${500 + 200 * index}ms` }"
+            :style="{ animationDelay: `${500 + 50 * index}ms` }"
           >
             <GalleryItemCard :galleryItem="item" />
           </div>
         </div>
       </div>
     </div>
+    <div
+      class="backToTopContainer"
+      :style="{
+        visibility: showBackToTopButton ? 'visible' : 'hidden',
+        opacity: showBackToTopButton ? 1 : 0
+      }"
+    >
+      <BackToTopButton />
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { GalleryCategory } from "@/models/GalleryCategory";
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Vue, Watch } from "vue-property-decorator";
 import GalleryItemCard from "./components/GalleryItemCard.vue";
 import { makeTitleCase } from "../../utils/stringUtils";
+import BackToTopButton from "../../components/BackToTopButton.vue";
 
 @Component({
   components: {
-    GalleryItemCard
+    GalleryItemCard,
+    BackToTopButton
   }
 })
 export default class GalleryPage extends Vue {
   baseUrl: string = process.env.VUE_APP_RESOURCE_BASE_URL;
   category: GalleryCategory | null = null;
+  showBackToTopButton = true;
 
   makeTitleCase = makeTitleCase;
+
+  onScroll() {
+    this.showBackToTopButton = document.documentElement.scrollTop > 0;
+    // console.log(document.documentElement.scrollTop, this.showBackToTopButton);
+    // this.showBackToTopButton = false;
+  }
+
   created() {
     const categoryModel = localStorage.getItem(
       `gallery-${this.$route.params.categoryName}`
     );
     this.category = JSON.parse(categoryModel ?? "{}");
+    document.addEventListener("scroll", this.onScroll);
+  }
+
+  destroyed() {
+    document.removeEventListener("scroll", this.onScroll);
   }
 }
 </script>
@@ -57,6 +82,7 @@ export default class GalleryPage extends Vue {
 <style>
 .categoryQuote {
   margin: 56px;
+  margin-top: 100px;
   animation-name: slideLeft;
   animation-duration: 1s;
 }
@@ -93,6 +119,7 @@ export default class GalleryPage extends Vue {
 }
 .galleryItemContainer > * {
   padding: 8px;
+  transition: 200ms;
 }
 .galleryItemInner {
   width: 33.33%;
@@ -118,6 +145,7 @@ export default class GalleryPage extends Vue {
 .galleryTitle {
   font-weight: bold;
   font-size: 24px;
+  transition: 200ms;
 }
 
 @keyframes slideRight {
@@ -155,6 +183,12 @@ export default class GalleryPage extends Vue {
 .galleryTitleContainer {
   animation-name: slideRight;
   animation-duration: 1s;
+  position: fixed;
+  top: 50px;
+  background-color: #fafafa;
+  z-index: 999;
+  width: 100%;
+  max-width: 960px;
 }
 @media screen and (max-width: 980px) {
   .galleryItemContainer > * {
@@ -162,12 +196,19 @@ export default class GalleryPage extends Vue {
   }
 
   .galleryTitle {
-    margin-left: 16px;
+    margin-left: 2px;
   }
 }
 @media screen and (max-width: 600px) {
   .galleryItemContainer > * {
     padding: 1px;
   }
+}
+
+.backToTopContainer {
+  position: fixed;
+  right: 50px;
+  bottom: 50px;
+  transition: 300ms;
 }
 </style>
