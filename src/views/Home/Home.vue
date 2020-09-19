@@ -65,7 +65,7 @@ export default class App extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .categoriesSection {
   margin-top: 80px;
 }

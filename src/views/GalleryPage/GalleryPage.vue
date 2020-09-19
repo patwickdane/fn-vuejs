@@ -1,11 +1,13 @@
 <template>
   <div class="galleryPageContainer">
     <div class="galleryPageContent">
-      <h1 class="galleryTitle ">
-        {{ makeTitleCase(category.name) }}
-      </h1>
-      <hr />
-      <div class="categoryQuote animate__animated animate__fadeIn">
+      <div class="galleryTitleContainer">
+        <h1 class="galleryTitle ">
+          {{ makeTitleCase(category.name) }}
+        </h1>
+        <hr />
+      </div>
+      <div class="categoryQuote">
         <span class="quoteText">{{ category.quote.text }}</span>
         <span class="quoteCreditText">{{ category.quote.credit }}</span>
       </div>
@@ -55,6 +57,8 @@ export default class GalleryPage extends Vue {
 <style>
 .categoryQuote {
   margin: 56px;
+  animation-name: slideLeft;
+  animation-duration: 1s;
 }
 .quoteCreditText {
   font-weight: bold;
@@ -114,6 +118,43 @@ export default class GalleryPage extends Vue {
 .galleryTitle {
   font-weight: bold;
   font-size: 24px;
+}
+
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(-10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.galleryTitleContainer {
+  animation-name: slideRight;
+  animation-duration: 1s;
 }
 @media screen and (max-width: 980px) {
   .galleryItemContainer > * {
