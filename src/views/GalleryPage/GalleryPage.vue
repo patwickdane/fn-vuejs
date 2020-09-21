@@ -1,5 +1,11 @@
 <template>
   <div class="galleryPageContainer">
+    <GalleryItemViewer
+      v-if="itemViewerIndex >= 0"
+      :galleryItems="category.items"
+      :clickIndex="itemViewerIndex"
+      :handleClose="handleGalleryItemViewerClose"
+    />
     <div class="galleryPageContent">
       <div>
         <div class="galleryTitleContainer">
@@ -21,6 +27,7 @@
           <div
             class="galleryItemInner2 animate__animated animate__fadeIn"
             :style="{ animationDelay: `${500 + 50 * index}ms` }"
+            @click="handleGalleryItemClick(index)"
           >
             <GalleryItemCard :galleryItem="item" />
           </div>
@@ -45,24 +52,33 @@ import { Component, Vue, Watch } from "vue-property-decorator";
 import GalleryItemCard from "./components/GalleryItemCard.vue";
 import { makeTitleCase } from "../../utils/stringUtils";
 import BackToTopButton from "../../components/BackToTopButton.vue";
+import GalleryItemViewer from "./components/GalleryItemViewer.vue";
 
 @Component({
   components: {
     GalleryItemCard,
-    BackToTopButton
+    BackToTopButton,
+    GalleryItemViewer
   }
 })
 export default class GalleryPage extends Vue {
   baseUrl: string = process.env.VUE_APP_RESOURCE_BASE_URL;
   category: GalleryCategory | null = null;
   showBackToTopButton = true;
+  itemViewerIndex = -1;
 
   makeTitleCase = makeTitleCase;
 
   onScroll() {
     this.showBackToTopButton = document.documentElement.scrollTop > 0;
-    // console.log(document.documentElement.scrollTop, this.showBackToTopButton);
-    // this.showBackToTopButton = false;
+  }
+
+  handleGalleryItemClick(itemIndex: number) {
+    this.itemViewerIndex = itemIndex;
+  }
+
+  handleGalleryItemViewerClose() {
+    this.itemViewerIndex = -1;
   }
 
   created() {
