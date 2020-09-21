@@ -1,6 +1,13 @@
 <template>
   <Backdrop
     ><div class="galleryItemViewerContainer">
+      <div
+        class="viewerNav leftNav"
+        @click="viewPreviousItem()"
+        v-if="currentIndex > 0"
+      >
+        <i class="fas fa-angle-left" />
+      </div>
       <div class="galleryItemViewerContent">
         <div class="imageContainer">
           <img :src="`${baseUrl}/${galleryItems[currentIndex].url}`" />
@@ -12,9 +19,16 @@
             </button>
           </div>
           <div class="descriptionText">
-            {{ galleryItems[clickIndex].description }}
+            {{ galleryItems[currentIndex].description }}
           </div>
         </div>
+      </div>
+      <div
+        class="viewerNav rightNav"
+        @click="viewNextItem()"
+        v-if="currentIndex < galleryItems.length - 1"
+      >
+        <i class="fas fa-angle-right" />
       </div>
     </div>
   </Backdrop>
@@ -37,27 +51,82 @@ export default class GalleryItemViewer extends Vue {
   @Prop() handleClose!: () => void;
 
   currentIndex = 0;
+  lockKeyTrigger = false;
 
   handleCloseButtonClick() {
     this.handleClose?.();
   }
 
+  viewNextItem() {
+    if (this.currentIndex < this.galleryItems.length - 1)
+      this.currentIndex += 1;
+  }
+
+  viewPreviousItem() {
+    if (this.currentIndex > 0) this.currentIndex -= 1;
+  }
+
+  handleKeyDown(event: KeyboardEvent) {
+    if (!this.lockKeyTrigger) {
+      this.lockKeyTrigger = true;
+
+      switch (event.key) {
+        case "ArrowRight":
+          this.viewNextItem();
+          break;
+        case "ArrowLeft":
+          this.viewPreviousItem();
+          break;
+      }
+    }
+  }
+
+  handleKeyUp() {
+    this.lockKeyTrigger = false;
+  }
+
   created() {
     this.currentIndex = this.clickIndex;
+
+    document.addEventListener("keydown", this.handleKeyDown);
+    document.addEventListener("keyup", this.handleKeyUp);
+  }
+
+  destroyed() {
+    document.removeEventListener("keydown", this.handleKeyDown);
+    document.removeEventListener("keydown", this.handleKeyUp);
   }
 }
 </script>
 
 <style>
+.viewerNav {
+  margin: 32px;
+  color: #ffffff55;
+  font-size: 3em;
+}
+
+.viewerNav > * {
+  transition: 200ms;
+  cursor: pointer;
+}
+
+.viewerNav > *:hover {
+  color: #fff;
+}
+
 .galleryItemViewerContainer {
-  background-color: white;
+  background-color: transparent;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
 }
 
 .galleryItemViewerContent {
+  background-color: #fff;
   display: flex;
   flex-direction: row;
 }
