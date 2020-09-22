@@ -15,5 +15,12 @@ export default class SubText extends Vue {
 span {
   font-size: 18px;
   color: var(--color-darker);
+  transition: 200ms;
+}
+
+@media screen and (max-width: 600px) {
+  span {
+    font-size: 14px;
+  }
 }
 </style>

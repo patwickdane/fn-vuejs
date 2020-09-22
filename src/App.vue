@@ -1,11 +1,22 @@
 <template>
   <div id="app">
     <div class="header">
-      <router-link to="/">
+      <router-link to="/" class="headerLink">
         <span class="homeIcon">
           <i class="fas fa-home fa-large" />
         </span>
       </router-link>
+      <div>
+        <router-link to="/about" class="headerLink navLink">
+          <span>about</span>
+        </router-link>
+        <router-link to="/contact" class="headerLink navLink">
+          <span>contact</span>
+        </router-link>
+        <router-link to="/lorem" class="headerLink navLink">
+          <span>lorem</span>
+        </router-link>
+      </div>
     </div>
     <router-view />
   </div>
@@ -34,15 +45,25 @@
   position: sticky;
   top: 0;
   z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.homeIcon {
+.headerLink {
   font-size: 1.8em;
   color: var(--color-main);
   transition: 200ms;
+  text-decoration: none;
 }
 
-.homeIcon:hover {
+.navLink {
+  font-size: 1.2em;
+  margin-left: 24px;
+  margin-right: 24px;
+}
+
+.headerLink:hover {
   color: #fff;
 }
 </style>

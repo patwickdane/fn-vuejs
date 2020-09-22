@@ -13,8 +13,15 @@ export default class TitleText extends Vue {
 
 <style scoped>
 h1 {
+  transition: 200ms;
   color: var(--color-main);
   font-size: 120px;
   font-weight: normal;
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 100px;
+  }
 }
 </style>
