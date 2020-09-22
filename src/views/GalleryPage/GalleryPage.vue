@@ -9,6 +9,11 @@
     <div class="galleryPageContent">
       <div>
         <div class="galleryTitleContainer">
+          <router-link :to="`/`">
+            <span class="backButton" type="button" role="button"
+              ><i class="fas fa-chevron-left"></i
+            ></span>
+          </router-link>
           <h1 class="galleryTitle ">
             {{ makeTitleCase(category.name) }}
           </h1>
@@ -197,6 +202,8 @@ export default class GalleryPage extends Vue {
 }
 
 .galleryTitleContainer {
+  display: flex;
+  align-items: center;
   animation-name: slideRight;
   animation-duration: 1s;
   position: fixed;
@@ -206,13 +213,20 @@ export default class GalleryPage extends Vue {
   width: 100%;
   max-width: 960px;
 }
+
+.backButton {
+  font-size: 1.5em;
+  margin-right: 16px;
+  cursor: pointer;
+  color: var(--color-main);
+}
 @media screen and (max-width: 980px) {
   .galleryItemContainer > * {
     padding: 2px;
   }
 
-  .galleryTitle {
-    margin-left: 2px;
+  .galleryTitleContainer {
+    margin-left: 8px;
   }
 }
 @media screen and (max-width: 600px) {
