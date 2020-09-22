@@ -87,6 +87,7 @@ export default class GalleryPage extends Vue {
   }
 
   created() {
+    console.log("!@#");
     const categoryModel = localStorage.getItem(
       `gallery-${this.$route.params.categoryName}`
     );
