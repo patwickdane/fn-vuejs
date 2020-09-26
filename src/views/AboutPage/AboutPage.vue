@@ -5,9 +5,12 @@
       backgroundImage: `linear-gradient(130deg, #ffffff00 -30%, #fff 18% 70%, #ffffff00 110%), url(${backgroundUrl})`
     }"
   >
+    <div class="pageTitleContainer">
+      <PageTitle titleText="About" :hideBackButton="true" />
+    </div>
     <article class="aboutText animate__animated animate__fadeIn">
       <p>
-        It is nothing short of extraordinary to we have these things called
+        It is nothing short of extraordinary to have these things called
         photgraphs that give us a glimpse of time gone by.
       </p>
       <p>
@@ -24,8 +27,11 @@
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
+import PageTitle from "../../components/PageTitle.vue";
 
-@Component
+@Component({
+  components: { PageTitle }
+})
 export default class AboutPage extends Vue {
   get backgroundUrl() {
     const url = `${process.env.VUE_APP_RESOURCE_BASE_URL}/static/about_bg.jpg`;
@@ -61,7 +67,13 @@ export default class AboutPage extends Vue {
 
 @media screen and (max-width: 1024px) {
   .contentPadding {
-    padding: 28% 15%;
+    padding: 25% 18%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .contentPadding {
+    padding: 25% 15%;
   }
 }
 </style>

@@ -9,14 +9,7 @@
     <div class="galleryPageContent">
       <div>
         <div class="galleryTitleContainer">
-          <router-link :to="`/`">
-            <span class="backButton" type="button" role="button"
-              ><i class="fas fa-chevron-left"></i
-            ></span>
-          </router-link>
-          <h1 class="galleryTitle ">
-            {{ makeTitleCase(category.name) }}
-          </h1>
+          <PageTitle :titleText="category.name" />
         </div>
         <div class="categoryQuote">
           <span class="quoteText">{{ category.quote.text }}</span>
@@ -53,17 +46,19 @@
 
 <script lang="ts">
 import { GalleryCategory } from "@/models/GalleryCategory";
-import { Component, Vue, Watch } from "vue-property-decorator";
+import { Component, Vue } from "vue-property-decorator";
 import GalleryItemCard from "./components/GalleryItemCard.vue";
 import { makeTitleCase } from "../../utils/stringUtils";
 import BackToTopButton from "../../components/BackToTopButton.vue";
+import PageTitle from "../../components/PageTitle.vue";
 import GalleryItemViewer from "./components/GalleryItemViewer.vue";
 
 @Component({
   components: {
     GalleryItemCard,
     BackToTopButton,
-    GalleryItemViewer
+    GalleryItemViewer,
+    PageTitle
   }
 })
 export default class GalleryPage extends Vue {
@@ -163,12 +158,6 @@ export default class GalleryPage extends Vue {
   max-width: 960px;
 }
 
-.galleryTitle {
-  font-weight: bold;
-  font-size: 24px;
-  transition: 200ms;
-}
-
 @keyframes slideRight {
   0% {
     opacity: 0;
@@ -201,24 +190,18 @@ export default class GalleryPage extends Vue {
   }
 }
 
-.galleryTitleContainer {
-  display: flex;
-  align-items: center;
-  animation-name: slideRight;
-  animation-duration: 1s;
-  position: fixed;
-  top: 50px;
-  background-color: #fafafa;
-  z-index: 999;
-  width: 100%;
-  max-width: 960px;
-}
-
 .backButton {
   font-size: 1.5em;
   margin-right: 16px;
   cursor: pointer;
   color: var(--color-main);
+}
+
+.galleryTitleContainer {
+  position: fixed;
+  background: #fafafa;
+  width: 100%;
+  top: 50px;
 }
 @media screen and (max-width: 980px) {
   .galleryItemContainer > * {
