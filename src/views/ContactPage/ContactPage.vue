@@ -1,31 +1,37 @@
 <template>
-  <MiscPage :backgroundUrl="`${baseUrl}/static/about_bg.jpg`" title="About">
+  <MiscPage :backgroundUrl="`${baseUrl}/static/contact_bg.jpg`" title="Contact">
     <article class="aboutText animate__animated animate__fadeIn">
       <p>
-        It is nothing short of extraordinary to have these things called
-        photgraphs that give us a glimpse of time gone by.
+        All gallery contents in this site are sourced from the official
+        <span class="highlightText">Filipinas Nostalgia</span> social media
+        accounts. I do not own any of it.
       </p>
       <p>
-        <span class="highlightText">Filipinas Nostalgia</span> aims to walk you
-        through the pages of Philippine history -- one photograph at a time. See
-        how this wonderful country has evolved from its naissance to its current
-        buzzing cities, ravenous mountains, and sparkling seas. Witness how the
-        people have braved numerous historical events as well as their everyday
-        lives as they are, in turn, carried by the winds of time.
+        You can connect with them through the links below.
       </p>
+      <div class="socialLinksContainer">
+        <a href="https://www.facebook.com/filipinasnostalgia" target="_blank"
+          ><i class="fab fa-facebook"
+        /></a>
+        <a href="https://www.instagram.com/filipinasnostalgia/" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://twitter.com/phnostalgia" target="_blank"
+          ><i class="fab fa-twitter"></i
+        ></a>
+      </div>
     </article>
   </MiscPage>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "vue-property-decorator";
-// import PageTitle from "../../components/PageTitle.vue";
 import MiscPage from "../MiscPage/MiscPage.vue";
 
 @Component({
   components: { MiscPage }
 })
-export default class AboutPage extends Vue {
+export default class ContactPage extends Vue {
   get baseUrl() {
     return process.env.VUE_APP_RESOURCE_BASE_URL;
   }
@@ -59,6 +65,23 @@ export default class AboutPage extends Vue {
 
 .highlightText {
   color: var(--color-main);
+}
+
+.socialLinksContainer {
+  margin: 64px;
+  text-align: center;
+  font-size: 2em;
+}
+
+.socialLinksContainer > a {
+  margin: 16px;
+  cursor: pointer;
+  transition: 200ms;
+  color: var(--color-main);
+}
+
+.socialLinksContainer > a:hover {
+  color: var(--color-darker);
 }
 
 @media screen and (max-width: 1024px) {

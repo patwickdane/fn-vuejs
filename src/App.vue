@@ -10,7 +10,7 @@
         <router-link to="/about" class="headerLink navLink">
           <span>about</span>
         </router-link>
-        <router-link to="contact" class="headerLink navLink">
+        <router-link to="/contact" class="headerLink navLink">
           <span>contact</span>
         </router-link>
         <router-link to="lorem" class="headerLink navLink">

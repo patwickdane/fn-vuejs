@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter, { RouteConfig } from "vue-router";
 import "../defaults.css";
 import AboutPage from "../views/AboutPage/AboutPage.vue";
+import ContactPage from "../views/ContactPage/ContactPage.vue";
 import GalleryPage from "../views/GalleryPage/GalleryPage.vue";
 import Home from "../views/Home/Home.vue";
 
@@ -17,6 +18,11 @@ const routes: Array<RouteConfig> = [
     path: "/about",
     name: "About",
     component: AboutPage,
+  },
+  {
+    path: "/contact",
+    name: "Contact",
+    component: ContactPage,
   },
   {
     path: "/gallery/:categoryName",
