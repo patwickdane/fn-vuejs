@@ -7,7 +7,7 @@
       :alt="galleryItem.description"
     />
     <div class="overlay">
-      <span>{{ galleryItem.description }}</span>
+      <span>{{ truncatedDescription }}</span>
     </div>
   </div>
 </template>
@@ -19,6 +19,16 @@ import { Component, Prop, Vue } from "vue-property-decorator";
 @Component
 export default class GalleryItemCard extends Vue {
   @Prop() galleryItem!: GalleryItem;
+
+  get truncatedDescription() {
+    const maxLength = 80;
+    const fullDescription = this.galleryItem.description;
+    const needsEllipsis = fullDescription.length >= maxLength;
+
+    return (
+      fullDescription.substring(0, maxLength) + (needsEllipsis ? "..." : "")
+    );
+  }
 
   baseUrl = process.env.VUE_APP_RESOURCE_BASE_URL;
 }

@@ -26,6 +26,7 @@
 :root {
   --color-main: #cc9966;
   --color-darker: #926f4c;
+  --color-lighter: ##ddbe9e;
 }
 
 #app {
@@ -52,7 +53,7 @@
 
 .headerLink {
   font-size: 1.8em;
-  color: var(--color-main);
+  color: #ddbe9e;
   transition: 200ms;
   text-decoration: none;
 }

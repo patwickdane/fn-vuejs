@@ -3,7 +3,7 @@
     <div class="pageTitleContainer">
       <PageTitle :titleText="title" :hideBackButton="true" />
     </div>
-    <div class="aboutText animate__animated animate__fadeIn">
+    <div class="contentArea animate__animated animate__fadeIn">
       <slot />
     </div>
     <div
@@ -58,8 +58,7 @@ export default class MiscPage extends Vue {
   z-index: 0;
 }
 
-.aboutText {
-  animation-delay: 800ms;
+.contentArea {
   position: relative;
   z-index: 1;
 }
