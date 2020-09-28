@@ -1,5 +1,8 @@
 <template>
-  <div class="pageTitleContainer">
+  <div
+    class="pageTitleContainer"
+    :style="{ background: noBackground ? 'transparent' : '#fafafa' }"
+  >
     <router-link :to="`/`" v-if="!hideBackButton">
       <span class="backButton" type="button" role="button">
         <i class="fas fa-chevron-left"></i>
@@ -23,6 +26,9 @@ export default class PageTitle extends Vue {
   @Prop({ default: false })
   hideBackButton!: boolean;
 
+  @Prop()
+  noBackground!: boolean;
+
   get title() {
     return makeTitleCase(this.titleText);
   }
@@ -30,13 +36,26 @@ export default class PageTitle extends Vue {
 </script>
 
 <style>
+@keyframes slideRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translateX(10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
 .pageTitleContainer {
   display: flex;
   align-items: center;
   animation-name: slideRight;
   animation-duration: 1s;
-  /* top: 50px; */
-  background-color: transparent;
   z-index: 999;
   width: 100%;
   max-width: 960px;
@@ -46,5 +65,12 @@ export default class PageTitle extends Vue {
   font-weight: bold;
   font-size: 24px;
   transition: 200ms;
+}
+
+.backButton {
+  font-size: 1.5em;
+  margin-right: 16px;
+  cursor: pointer;
+  color: var(--color-main);
 }
 </style>

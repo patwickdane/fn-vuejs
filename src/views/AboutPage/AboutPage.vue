@@ -37,10 +37,6 @@ export default class AboutPage extends Vue {
 </script>
 
 <style scoped>
-.contentPadding {
-  padding: 10% 30%;
-  transition: 200ms;
-}
 .aboutPageContainer {
   box-sizing: border-box;
   line-height: 2em;
@@ -61,15 +57,9 @@ export default class AboutPage extends Vue {
   color: var(--color-main);
 }
 
-@media screen and (max-width: 1024px) {
-  .contentPadding {
-    padding: 25% 18%;
-  }
-}
-
 @media screen and (max-width: 600px) {
-  .contentPadding {
-    padding: 25% 15%;
+  .aboutText {
+    padding: 0;
   }
 }
 </style>

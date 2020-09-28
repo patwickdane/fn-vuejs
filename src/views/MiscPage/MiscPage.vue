@@ -1,7 +1,14 @@
 <template>
-  <div class="miscPageContainer contentPadding">
+  <div
+    class="miscPageContainer contentPadding"
+    :style="{ justifyContent: hasOverflow ? 'flex-start' : 'center' }"
+  >
     <div class="pageTitleContainer">
-      <PageTitle :titleText="title" :hideBackButton="true" />
+      <PageTitle
+        :titleText="title"
+        :noBackground="true"
+        :hideBackButton="true"
+      />
     </div>
     <div class="contentArea animate__animated animate__fadeIn">
       <slot />
@@ -28,23 +35,36 @@ export default class MiscPage extends Vue {
 
   @Prop()
   title!: string;
+
+  hasOverflow = false;
+
+  mounted() {
+    this.hasOverflow =
+      document.documentElement.scrollHeight >
+      document.documentElement.clientHeight;
+  }
 }
 </script>
 
 <style scoped>
+.miscPageContainer {
+  box-sizing: border-box;
+  line-height: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: flex-start;
+  height: calc(100vh - 50px);
+}
+
 .contentPadding {
-  padding: 10% 30%;
-  padding-bottom: 0;
+  padding-left: 30%;
+  padding-right: 30%;
   transition: 200ms;
 }
 
 .pageTitleContainer {
   position: relative;
-}
-
-.miscPageContainer {
-  box-sizing: border-box;
-  line-height: 2em;
 }
 
 .grayscaleBg {
@@ -70,14 +90,7 @@ export default class MiscPage extends Vue {
 
 @media screen and (max-width: 1024px) {
   .contentPadding {
-    padding: 25% 18%;
-    padding-bottom: 0;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .contentPadding {
-    padding: 20% 15%;
+    padding: 0 10%;
     padding-bottom: 0;
   }
 }

@@ -95,12 +95,13 @@ export default class GalleryPage extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 .categoryQuote {
   margin: 56px;
   margin-top: 100px;
   animation-name: slideLeft;
   animation-duration: 1s;
+  z-index: 1;
 }
 .quoteCreditText {
   font-weight: bold;
@@ -158,43 +159,26 @@ export default class GalleryPage extends Vue {
   max-width: 960px;
 }
 
-@keyframes slideRight {
-  0% {
-    opacity: 0;
-    transform: translateX(-50px);
-  }
-
-  80% {
-    opacity: 1;
-    transform: translateX(10px);
-  }
-
-  100% {
-    transform: translateX(0);
-  }
-}
-
 @keyframes slideLeft {
   0% {
     opacity: 0;
     transform: translateX(50px);
+    position: relative;
+    z-index: 0;
   }
 
   80% {
     opacity: 1;
     transform: translateX(-10px);
+    position: relative;
+    z-index: 0;
   }
 
   100% {
     transform: translateX(0);
+    position: relative;
+    z-index: 0;
   }
-}
-
-.backButton {
-  font-size: 1.5em;
-  margin-right: 16px;
-  cursor: pointer;
-  color: var(--color-main);
 }
 
 .galleryTitleContainer {
@@ -202,6 +186,7 @@ export default class GalleryPage extends Vue {
   background: #fafafa;
   width: 100%;
   top: 50px;
+  z-index: 999;
 }
 @media screen and (max-width: 980px) {
   .galleryItemContainer > * {
@@ -210,6 +195,11 @@ export default class GalleryPage extends Vue {
 
   .galleryTitleContainer {
     margin-left: 8px;
+  }
+
+  .categoryQuote {
+    margin: 24px;
+    margin-top: 60px;
   }
 }
 @media screen and (max-width: 600px) {

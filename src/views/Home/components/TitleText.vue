@@ -19,9 +19,20 @@ h1 {
   font-weight: normal;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 460px) {
   h1 {
-    font-size: 100px;
+    font-size: 70px;
+  }
+}
+@media screen and (max-width: 600px) and (min-width: 460px) {
+  h1 {
+    font-size: 90px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  h1 {
+    font-size: 60px;
   }
 }
 </style>

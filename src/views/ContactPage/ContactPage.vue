@@ -1,6 +1,6 @@
 <template>
   <MiscPage :backgroundUrl="`${baseUrl}/static/contact_bg.jpg`" title="Contact">
-    <article class="aboutText animate__animated animate__fadeIn">
+    <article class="pageText animate__animated animate__fadeIn">
       <p>
         All gallery contents in this site are sourced from the official
         <span class="highlightText">Filipinas Nostalgia</span> social media
@@ -43,24 +43,8 @@ export default class ContactPage extends Vue {
 </script>
 
 <style scoped>
-.contentPadding {
-  padding: 10% 30%;
-  transition: 200ms;
-}
-.aboutPageContainer {
-  box-sizing: border-box;
-  line-height: 2em;
-  height: calc(100vh - 50px);
-  background-position: bottom right;
-  background-size: contain;
-}
-
-.aboutText {
+.pageText {
   animation-delay: 800ms;
-}
-
-.aboutPageContainer p {
-  margin-top: 32px;
 }
 
 .highlightText {
@@ -68,9 +52,10 @@ export default class ContactPage extends Vue {
 }
 
 .socialLinksContainer {
-  margin: 64px;
+  margin-top: 64px;
   text-align: center;
   font-size: 2em;
+  width: 100%;
 }
 
 .socialLinksContainer > a {
@@ -84,15 +69,12 @@ export default class ContactPage extends Vue {
   color: var(--color-darker);
 }
 
-@media screen and (max-width: 1024px) {
-  .contentPadding {
-    padding: 25% 18%;
+@media screen and (max-width: 320px) {
+  .socialLinksContainer {
+    margin-top: 32px;
   }
-}
-
-@media screen and (max-width: 600px) {
-  .contentPadding {
-    padding: 25% 15%;
+  .socialLinksContainer > a {
+    margin: 8px;
   }
 }
 </style>

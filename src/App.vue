@@ -41,7 +41,7 @@
   background-color: var(--color-darker);
   box-shadow: 0px 1px 4px #00000088;
   color: #fff;
-  padding: 8px;
+  padding: 24px;
   box-sizing: border-box;
   position: sticky;
   top: 0;
@@ -64,7 +64,21 @@
   margin-right: 24px;
 }
 
+.navLink:last-child {
+  margin-right: 0;
+}
+
 .headerLink:hover {
   color: #fff;
+}
+
+@media screen and (max-width: 460px) {
+  .navLink {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+  .header {
+    padding: 8px;
+  }
 }
 </style>
