@@ -9,7 +9,7 @@
     <div
       class="grayscaleBg animate__animated animate__fadeIn"
       :style="{
-        backgroundImage: `linear-gradient(130deg, #ffffff00 -50%, #fff 18% 70%, #ffffff00 130%), url(${backgroundUrl})`
+        backgroundImage: `linear-gradient(130deg, #ffffff00 -50%, #fff 18% 74%, #ffffff00 120%), url(${backgroundUrl})`
       }"
     />
   </div>
@@ -34,6 +34,7 @@ export default class MiscPage extends Vue {
 <style scoped>
 .contentPadding {
   padding: 10% 30%;
+  padding-bottom: 0;
   transition: 200ms;
 }
 
@@ -48,7 +49,7 @@ export default class MiscPage extends Vue {
 
 .grayscaleBg {
   background-position: bottom right;
-  background-size: contain;
+  background-size: inherit;
   filter: grayscale(1);
   position: fixed;
   top: 0;
@@ -70,12 +71,14 @@ export default class MiscPage extends Vue {
 @media screen and (max-width: 1024px) {
   .contentPadding {
     padding: 25% 18%;
+    padding-bottom: 0;
   }
 }
 
 @media screen and (max-width: 600px) {
   .contentPadding {
     padding: 20% 15%;
+    padding-bottom: 0;
   }
 }
 </style>

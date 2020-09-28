@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="animate__animated animate__fadeIn">
     <div class="texts">
       <TitleText text="Filipinas Nostalgia" />
       <SubText text="history of the Philippines as captured in photographs" />
