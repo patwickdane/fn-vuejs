@@ -1,11 +1,7 @@
 <template>
-  <Backdrop
+  <Backdrop :onBackdropClick="handleCloseButtonClick"
     ><div class="galleryItemViewerContainer">
-      <div
-        class="viewerNav leftNav"
-        @click="viewPreviousItem()"
-        v-if="currentIndex > 0"
-      >
+      <div class="viewerNav leftNav" @click="viewPreviousItem()">
         <i class="fas fa-angle-left" />
       </div>
       <div class="galleryItemViewerContent">
@@ -23,11 +19,7 @@
           </div>
         </div>
       </div>
-      <div
-        class="viewerNav rightNav"
-        @click="viewNextItem()"
-        v-if="currentIndex < galleryItems.length - 1"
-      >
+      <div class="viewerNav rightNav" @click="viewNextItem()">
         <i class="fas fa-angle-right" />
       </div>
     </div>
@@ -101,7 +93,7 @@ export default class GalleryItemViewer extends Vue {
 
 <style>
 .viewerNav {
-  margin: 32px;
+  margin: 8px;
   color: #ffffff55;
   font-size: 3em;
 }
@@ -160,9 +152,36 @@ export default class GalleryItemViewer extends Vue {
   margin: 16px 0;
 }
 
+.imageContainer {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+}
+
 .imageContainer > img {
   display: block;
   max-width: 50vw;
   max-height: 50vh;
+}
+
+@media screen and (max-width: 460px) {
+  .descriptionTextContainer {
+    display: none;
+  }
+  .viewerNav {
+    font-size: 1.5em;
+  }
+  .imageContainer {
+    max-width: 80vw;
+  }
+  .imageContainer > img {
+    max-width: 80vw;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .descriptionTextContainer {
+    width: 200px;
+  }
 }
 </style>

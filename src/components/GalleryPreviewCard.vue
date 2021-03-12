@@ -12,7 +12,6 @@
       </transition>
     </div>
     <span class="cardTitle">{{ title }}</span>
-    <!-- <span>{{ title }}</span> -->
   </div>
 </template>
 <script lang="ts">

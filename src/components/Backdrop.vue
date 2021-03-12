@@ -1,20 +1,37 @@
 <template>
-  <div class="backdrop">
+  <div
+    class="backdrop"
+    id="modalBackdrop"
+    @click="
+      {
+        handleClick($event);
+      }
+    "
+  >
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "vue-property-decorator";
+import { Component, Prop, Vue } from "vue-property-decorator";
 
 @Component
 export default class Backdrop extends Vue {
+  @Prop()
+  onBackdropClick?: () => void;
+
   mounted() {
     document.documentElement.style.overflow = "hidden";
   }
 
   destroyed() {
     document.documentElement.style.overflow = "auto";
+  }
+
+  handleClick(event: MouseEvent) {
+    if ((event.target as HTMLElement).id === "modalBackdrop") {
+      this.onBackdropClick?.();
+    }
   }
 }
 </script>
