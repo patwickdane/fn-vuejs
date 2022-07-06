@@ -39,6 +39,7 @@ export default class GalleryItemCard extends Vue {
   cursor: pointer;
   transition: 200ms;
   position: relative;
+  width: 100%;
 }
 
 .overlay {
